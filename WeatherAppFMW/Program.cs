@@ -50,10 +50,7 @@ namespace WeatherAppFMW
                     Console.WriteLine("Current time: {0}", weatherForecast.GetCurrentTime());
 
                     Forecastday forecasts = weatherForecast.GetForecasts().FirstOrDefault();
-
-                    List<Hour> hours = forecasts.Hour.Where(x => DateTime.Parse(x.Time) >= DateTime.Now.AddHours(-1) &&
-                                                            DateTime.Parse(x.Time) < DateTime.Now.AddHours(2))
-                                                            .ToList();
+                    List<Hour> hours = ForecastRange.GetForecastRange(forecasts, DateTime.Parse(weatherForecast.GetCurrentTime()).Hour);
 
                     foreach (Hour hour in hours)
                     {
