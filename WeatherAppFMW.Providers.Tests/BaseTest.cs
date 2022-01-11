@@ -3,7 +3,7 @@ using System;
 using WeatherAppFMW.Models;
 using WeatherAppFMW.Providers.Providers;
 
-namespace WeatherApp.Providers.Tests
+namespace WeatherAppFMW.Providers.Tests
 {
     public class BaseTest
     {

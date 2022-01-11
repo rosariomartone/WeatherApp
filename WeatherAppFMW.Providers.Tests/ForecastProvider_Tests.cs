@@ -1,12 +1,13 @@
-﻿using NUnit.Framework;
-using WeatherAppFMW.Providers;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
-namespace WeatherApp.Providers.Tests
+namespace WeatherAppFMW.Providers.Tests
 {
-    public class ForecastProviderTests : BaseTest
+    [TestClass]
+    public class ForecastProvider_Tests : BaseTest
     {
-        [Test]
-        [TestCase("API")]
+        [TestMethod]
+        [DataRow("API")]
         public void GetProvider_RetrieveProvider(string providerType)
         {
             IForecastProvider provider = ForecastProvider.GetProvider(providerType, _config);
@@ -14,8 +15,8 @@ namespace WeatherApp.Providers.Tests
             Assert.IsNotNull(provider);
         }
 
-        [Test]
-        [TestCase("MSSQL")]
+        [TestMethod]
+        [DataRow("MSSQL")]
         public void GetProvider_FailingRetrieveProvider(string providerType)
         {
             IForecastProvider provider = ForecastProvider.GetProvider(providerType, _config);
