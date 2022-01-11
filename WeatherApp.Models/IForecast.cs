@@ -15,5 +15,7 @@
         public string GetTimeZone();
 
         public string GetCurrentTime();
+
+        public List<Forecastday> GetForecasts();
     }
 }

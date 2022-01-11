@@ -2,7 +2,6 @@
 
 namespace WeatherApp.Models
 {
-    // Root myDeserializedClass = JsonSerializer.Deserialize<Root>(myJsonResponse);
     public class Location
     {
         [JsonPropertyName("name")]
@@ -364,6 +363,11 @@ namespace WeatherApp.Models
         public string GetCurrentTime()
         {
             return this.Location.Localtime;
+        }
+
+        public List<Forecastday> GetForecasts()
+        {
+            return this.Forecast.Forecastday;
         }
     }
 }

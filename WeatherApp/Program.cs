@@ -40,6 +40,17 @@ if(forecastProvider!= null)
         Console.WriteLine("Lon: {0}", weatherForecast.GetLongitude());
         Console.WriteLine("Time zone: {0}", weatherForecast.GetTimeZone());
         Console.WriteLine("Current time: {0}", weatherForecast.GetCurrentTime());
+
+        Forecastday forecasts = weatherForecast.GetForecasts().FirstOrDefault();
+
+        List<Hour> hours = forecasts.Hour.Where(x => DateTime.Parse(x.Time) >= DateTime.Now.AddHours(-1) && 
+                                                DateTime.Parse(x.Time) < DateTime.Now.AddHours(2))
+                                                .ToList();
+
+        foreach(Hour hour in hours)
+        {
+            Console.WriteLine("Forecast time: {0} is {1}", hour.Time, hour.Condition.Text);
+        }
     }
 }
 else
