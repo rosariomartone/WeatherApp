@@ -33,14 +33,7 @@ namespace WeatherAppFMW.Providers.Providers
 
             if (statusCode.Equals(HttpStatusCode.OK))
             {
-                try
-                {
-                    return JsonConvert.DeserializeObject<ForecastWeather>(responseString);
-                }
-                catch(Exception ex)
-                {
-                    string message = ex.StackTrace;
-                }
+                return JsonConvert.DeserializeObject<ForecastWeather>(responseString);
             }
 
             //Managing different API responses (403, 404, etc)
