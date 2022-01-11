@@ -1,2 +1,12 @@
 # WeatherApp
-This solution is retrieving the forecast for a provided city. The forecast is for 3 hours from now.
+
+To show the weather forecast for one day, different hours,
+
+Please make sure the application can perform the following 
+
+Can take the name of the city as input
+Show the city information (Name, Region, Country, Lat, Lon, Time zone, and Current time)
+Shows 3 hours forecast for the city (Condition of the forecast should be enough e.g. Partly Cloudy, the 3 hours should be from Now time)
+Unit testing is important
+Following best practices is important
+Use the weather API as it has all the information you need and it is free https://www.weatherapi.com/
