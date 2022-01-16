@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace WeatherAppFMW.Providers.Tests
 {
