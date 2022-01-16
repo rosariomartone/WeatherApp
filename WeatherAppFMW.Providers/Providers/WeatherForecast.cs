@@ -8,17 +8,29 @@ using WeatherAppFMW.Models;
 
 namespace WeatherAppFMW.Providers.Providers
 {
+    /// <summary>
+    /// Implementation of IForecastProvider for API.
+    /// </summary>
     public class WeatherForecast : IForecastProvider
     {
         private string _apiKey = string.Empty;
         private string _forecastUrl = string.Empty;
 
-        public WeatherForecast(IConfigurationRoot build)
+        /// <summary>
+        /// Constructior for WeatherForecast.
+        /// </summary>
+        /// <param name="build"></param>
+        public WeatherForecast(IConfiguration build)
         {
-            _apiKey = build.GetSection("API").GetSection("Key").Value;
-            _forecastUrl = build.GetSection("API").GetSection("WeatherAPIUrl_Forecast").Value;
+            _apiKey = build?.GetSection("API")?["Key"];
+            _forecastUrl = build?.GetSection("API")?["WeatherAPIUrl_Forecast"];
         }
 
+        /// <summary>
+        /// Retrieve a IForecast object using the city as input.
+        /// </summary>
+        /// <param name="city">The city.</param>
+        /// <returns></returns>
         public async Task<IForecast> GetForecastAsync(string city)
         {
             ForecastWeather forecast;

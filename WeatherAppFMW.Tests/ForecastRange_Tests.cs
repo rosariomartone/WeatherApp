@@ -6,11 +6,17 @@ using WeatherAppFMW.Models;
 
 namespace WeatherAppFMW.Tests
 {
+    /// <summary>
+    /// test class for ForecastRange.
+    /// </summary>
     [TestClass]
     public class ForecastRange_Tests
     {
         private Mock<IForecastday> _forecastday;
 
+        /// <summary>
+        /// Init method for ForecastRange.
+        /// </summary>
         [TestInitialize]
         public void ForecastRange_Init()
         {
@@ -195,6 +201,10 @@ namespace WeatherAppFMW.Tests
             });
         }
 
+        /// <summary>
+        /// Test the ForecastRange.GetForecastRange method correctly retrieving 3 hours forecast.
+        /// </summary>
+        /// <param name="hour">The hour as start for the 3 hours forecast.</param>
         [TestMethod]
         [DataRow(3)]
 
@@ -207,6 +217,10 @@ namespace WeatherAppFMW.Tests
             Assert.IsTrue(hours[2].Time.Equals("2022-01-11 05:00"));
         }
 
+        /// <summary>
+        /// Test the ForecastRange.GetForecastRange method correctly retrieving 1 hours forecast.
+        /// </summary>
+        /// <param name="hour">The hour as start for the 1 hours forecast.</param>
         [TestMethod]
         [DataRow(23)]
 
