@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System.Collections.Generic;
 using WeatherAppFMW.Helpers;
 using WeatherAppFMW.Models;
@@ -8,13 +9,13 @@ namespace WeatherAppFMW.Tests
     [TestClass]
     public class ForecastRange_Tests
     {
-        private Forecastday forecasts = null;
+        private Mock<IForecastday> _forecastday;
 
         [TestInitialize]
         public void ForecastRange_Init()
         {
-            forecasts = new Forecastday();
-            forecasts.Hour = new List<Hour>()
+            _forecastday = new Mock<IForecastday>();
+            _forecastday.Setup(p => p.Hour).Returns(new List<Hour>()
             {
                 new Hour {
                     Time = "2022-01-11 00:00",
@@ -191,7 +192,7 @@ namespace WeatherAppFMW.Tests
                         Text = "Clear"
                     }
                 }
-            };
+            });
         }
 
         [TestMethod]
@@ -199,7 +200,7 @@ namespace WeatherAppFMW.Tests
 
         public void GetForecastRange_Retrieve(int hour)
         {
-            List<Hour> hours = ForecastRange.GetForecastRange(forecasts, hour);
+            List<Hour> hours = ForecastRange.GetForecastRange(_forecastday.Object, hour);
             Assert.IsTrue(hours.Count == 3);
             Assert.IsTrue(hours[0].Time.Equals("2022-01-11 03:00"));
             Assert.IsTrue(hours[1].Time.Equals("2022-01-11 04:00"));
@@ -211,7 +212,7 @@ namespace WeatherAppFMW.Tests
 
         public void GetForecastRange_RetrieveOneHour(int hour)
         {
-            List<Hour> hours = ForecastRange.GetForecastRange(forecasts, hour);
+            List<Hour> hours = ForecastRange.GetForecastRange(_forecastday.Object, hour);
             Assert.IsTrue(hours.Count == 1);
             Assert.IsTrue(hours[0].Time.Equals("2022-01-11 23:00"));
         }

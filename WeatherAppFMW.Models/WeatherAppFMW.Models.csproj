@@ -78,6 +78,7 @@
   <ItemGroup>
     <Compile Include="ForecastWeather.cs" />
     <Compile Include="IForecast.cs" />
+    <Compile Include="IForecastday.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

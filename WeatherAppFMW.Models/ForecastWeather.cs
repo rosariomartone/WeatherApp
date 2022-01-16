@@ -297,7 +297,7 @@ namespace WeatherAppFMW.Models
         public double Uv { get; set; }
     }
 
-    public class Forecastday
+    public class Forecastday :IForecastday
     {
         [JsonPropertyName("date")]
         public string Date { get; set; }

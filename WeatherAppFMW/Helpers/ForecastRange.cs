@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using WeatherAppFMW.Models;
 
 namespace WeatherAppFMW.Helpers
 {
     public static class ForecastRange
     {
-        public static List<Hour> GetForecastRange(Forecastday forecasts, int hour)
+        public static List<Hour> GetForecastRange(IForecastday forecasts, int hour)
         {
             List<Hour> hours = new List<Hour>();
             int forCastSplit = 1;
