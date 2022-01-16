@@ -8,3 +8,5 @@ Shows 3 hours forecast for the city (Condition of the forecast should be enough 
 Unit testing is important
 Following best practices is important
 Use the weather API as it has all the information you need and it is free https://www.weatherapi.com/
+
+FOr testing, we are using Moq.net.
