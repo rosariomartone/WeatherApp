@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using WeatherAppFMW.Models;
 
 namespace WeatherAppFMW.Providers.Tests
@@ -17,7 +18,19 @@ namespace WeatherAppFMW.Providers.Tests
         [DataRow("London")]
         public void GetForecastAsync_RetrieveCountryInfo(string city)
         {
-            IForecast forecast = GetResult(city);
+            ForecastWeather forecastWeather = new ForecastWeather()
+            {
+                Location = new Location()
+                {
+                    Country = "United Kingdom",
+                }
+            };
+
+            Mock<IForecastProvider> _forecastProvider = new Mock<IForecastProvider>();
+            _forecastProvider.Setup(x => x.GetForecastAsync(city))
+                .ReturnsAsync(forecastWeather);
+
+            IForecast forecast = GetResult(city, _forecastProvider);
             Assert.IsTrue(forecast.GetCountry().Equals("United Kingdom"));
         }
 
@@ -29,7 +42,8 @@ namespace WeatherAppFMW.Providers.Tests
         [DataRow("unknown")]
         public void GetForecastAsync_FailRetrieveCountryInfo(string city)
         {
-            IForecast forecast = GetResult(city);
+            Mock<IForecastProvider> _forecastProvider = new Mock<IForecastProvider>();
+            IForecast forecast = GetResult(city, _forecastProvider);
             Assert.IsNull(forecast);
         }
     }
