@@ -22,15 +22,5 @@ namespace WeatherAppFMW.Providers.Tests
             mockConfSection.SetupGet(m => m[It.Is<string>(s => s == "WeatherAPIUrl_Forecast")]).Returns("http://api.weatherapi.com/v1/forecast.json");
             _config.Setup(a => a.GetSection(It.Is<string>(s => s == "API"))).Returns(mockConfSection.Object);
         }
-
-        /// <summary>
-        /// Returns a IForecast for a city as input.
-        /// </summary>
-        /// <param name="city">The city as input for the search.</param>
-        /// <returns></returns>
-        public IForecast GetResult(string city, Mock<IForecastProvider> _forecastProvider)
-        {
-            return _forecastProvider.Object.GetForecastAsync(city).Result;
-        }
     }
 }

@@ -1,6 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using Newtonsoft.Json;
+using RichardSzalay.MockHttp;
+using System.Net.Http;
 using WeatherAppFMW.Models;
+using WeatherAppFMW.Providers.Providers;
 
 namespace WeatherAppFMW.Providers.Tests
 {
@@ -26,12 +30,15 @@ namespace WeatherAppFMW.Providers.Tests
                 }
             };
 
-            Mock<IForecastProvider> _forecastProvider = new Mock<IForecastProvider>();
-            _forecastProvider.Setup(x => x.GetForecastAsync(city))
-                .ReturnsAsync(forecastWeather);
+            var mockHttp = new MockHttpMessageHandler();
+            mockHttp.When("http://api.weatherapi.com/v1/*")
+                    .Respond("application/json", JsonConvert.SerializeObject(forecastWeather));
+            var client = new HttpClient(mockHttp);
 
-            IForecast forecast = GetResult(city, _forecastProvider);
-            Assert.IsTrue(forecast.GetCountry().Equals("United Kingdom"));
+            WeatherForecast forecast = new WeatherForecast(this._config.Object, client);
+            IForecast _forecast = forecast.GetForecastAsync(city).Result;
+
+            Assert.IsTrue(_forecast.GetCountry().Equals("United Kingdom"));
         }
 
         /// <summary>
@@ -42,9 +49,23 @@ namespace WeatherAppFMW.Providers.Tests
         [DataRow("unknown")]
         public void GetForecastAsync_FailRetrieveCountryInfo(string city)
         {
-            Mock<IForecastProvider> _forecastProvider = new Mock<IForecastProvider>();
-            IForecast forecast = GetResult(city, _forecastProvider);
-            Assert.IsNull(forecast);
+            ForecastWeather forecastWeather = new ForecastWeather()
+            {
+                Location = new Location()
+                {
+                    Country = "United Kingdom",
+                }
+            };
+
+            var mockHttp = new MockHttpMessageHandler();
+            mockHttp.When("http://api.weatherapi.com/v1/*")
+                    .Respond("application/json", string.Empty);
+            var client = new HttpClient(mockHttp);
+
+            WeatherForecast forecast = new WeatherForecast(this._config.Object, client);
+            IForecast _forecast = forecast.GetForecastAsync(city).Result;
+
+            Assert.IsNull(_forecast);
         }
     }
 }
