@@ -38,6 +38,7 @@ namespace WeatherAppFMW.Providers.Tests
             WeatherForecast forecast = new WeatherForecast(this._config.Object, client);
             IForecast _forecast = forecast.GetForecastAsync(city).Result;
 
+            Assert.IsNotNull(_forecast);
             Assert.IsTrue(_forecast.GetCountry().Equals("United Kingdom"));
         }
 
@@ -49,14 +50,6 @@ namespace WeatherAppFMW.Providers.Tests
         [DataRow("unknown")]
         public void GetForecastAsync_FailRetrieveCountryInfo(string city)
         {
-            ForecastWeather forecastWeather = new ForecastWeather()
-            {
-                Location = new Location()
-                {
-                    Country = "United Kingdom",
-                }
-            };
-
             var mockHttp = new MockHttpMessageHandler();
             mockHttp.When("http://api.weatherapi.com/v1/*")
                     .Respond("application/json", string.Empty);
