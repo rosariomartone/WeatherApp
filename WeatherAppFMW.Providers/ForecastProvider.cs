@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System.Net.Http;
 using WeatherAppFMW.Providers.Providers;
 
 namespace WeatherAppFMW.Providers
@@ -19,7 +20,7 @@ namespace WeatherAppFMW.Providers
             switch(providerType)
             {
                 case "API":
-                    return new WeatherForecast(root);
+                    return new WeatherForecast(root, new HttpClient());
                 default:
                     return null;
             }

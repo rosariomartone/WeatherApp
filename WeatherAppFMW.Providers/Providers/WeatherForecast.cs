@@ -15,15 +15,17 @@ namespace WeatherAppFMW.Providers.Providers
     {
         private string _apiKey = string.Empty;
         private string _forecastUrl = string.Empty;
+        private HttpClient _client = null;
 
         /// <summary>
         /// Constructior for WeatherForecast.
         /// </summary>
         /// <param name="build"></param>
-        public WeatherForecast(IConfiguration build)
+        public WeatherForecast(IConfiguration build, HttpClient client)
         {
-            _apiKey = build?.GetSection("API")?["Key"];
-            _forecastUrl = build?.GetSection("API")?["WeatherAPIUrl_Forecast"];
+            this._apiKey = build?.GetSection("API")?["Key"];
+            this._forecastUrl = build?.GetSection("API")?["WeatherAPIUrl_Forecast"];
+            this._client = client;
         }
 
         /// <summary>
@@ -34,12 +36,11 @@ namespace WeatherAppFMW.Providers.Providers
         public async Task<IForecast> GetForecastAsync(string city)
         {
             ForecastWeather forecast;
-            HttpClient client = new HttpClient();
             HttpRequestMessage request = new HttpRequestMessage();
             request.RequestUri = new Uri($"{ this._forecastUrl }?q={ city }");
             request.Method = HttpMethod.Get;
             request.Headers.Add("key", this._apiKey);
-            HttpResponseMessage response = await client.SendAsync(request);
+            HttpResponseMessage response = await this._client.SendAsync(request);
             var responseString = await response.Content.ReadAsStringAsync();
             var statusCode = response.StatusCode;
 
