@@ -21,7 +21,7 @@ namespace WeatherAppFMW.Models
         public double Lon { get; set; }
 
         [JsonPropertyName("tz_id")]
-        public string TzId { get; set; }
+        public string tz_id { get; set; }
 
         [JsonPropertyName("localtime_epoch")]
         public int LocaltimeEpoch { get; set; }
@@ -348,7 +348,7 @@ namespace WeatherAppFMW.Models
         }
         public string GetTimeZone()
         {
-            return this.Location.TzId;
+            return this.Location.tz_id;
         }
 
         public string GetName()
