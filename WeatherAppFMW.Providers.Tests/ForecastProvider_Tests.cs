@@ -16,7 +16,7 @@ namespace WeatherAppFMW.Providers.Tests
         [DataRow("API")]
         public void GetProvider_RetrieveProvider(string providerType)
         {
-            IForecastProvider provider = ForecastProvider.GetProvider(providerType, _config.Object);
+            IForecastProvider provider = ForecastProvider.GetProvider(providerType, _config.Object, _loggerService.Object);
 
             Assert.IsNotNull(provider);
         }
@@ -29,7 +29,7 @@ namespace WeatherAppFMW.Providers.Tests
         [DataRow("MSSQL")]
         public void GetProvider_FailingRetrieveProvider(string providerType)
         {
-            IForecastProvider provider = ForecastProvider.GetProvider(providerType, _config.Object);
+            IForecastProvider provider = ForecastProvider.GetProvider(providerType, _config.Object, _loggerService.Object);
 
             Assert.IsNull(provider);
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.Net.Http;
 using WeatherAppFMW.Providers.Providers;
+using WeatherAppFMW.Services;
 
 namespace WeatherAppFMW.Providers
 {
@@ -15,12 +16,18 @@ namespace WeatherAppFMW.Providers
         /// <param name="providerType">The provider type.</param>
         /// <param name="root">The root for the congif object.</param>
         /// <returns></returns>
-        public static IForecastProvider GetProvider(string providerType, IConfiguration root)
+        public static IForecastProvider GetProvider(
+            string providerType, 
+            IConfiguration root,
+            ILoggerService loggerService)
         {
             switch(providerType)
             {
                 case "API":
-                    return new WeatherForecast(root, new HttpClient());
+                    return new WeatherForecast(
+                        loggerService,
+                        root, 
+                        new HttpClient());
                 default:
                     return null;
             }

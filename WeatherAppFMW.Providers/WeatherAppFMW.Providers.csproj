@@ -132,15 +132,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\EnumLogType.cs" />
     <Compile Include="ForecastProvider.cs" />
     <Compile Include="IForecastProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\LoggerProvider.cs" />
     <Compile Include="Providers\WeatherForecast.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WeatherAppFMW.Models\WeatherAppFMW.Models.csproj">
       <Project>{FEFBB252-D650-40E7-AA44-61CD39160134}</Project>
       <Name>WeatherAppFMW.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WeatherAppFMW.Services\WeatherAppFMW.Services.csproj">
+      <Project>{71b3fd26-6a29-4ad6-90e1-bfe21168428f}</Project>
+      <Name>WeatherAppFMW.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

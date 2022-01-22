@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using Newtonsoft.Json;
 using RichardSzalay.MockHttp;
 using System.Net.Http;
@@ -35,7 +34,7 @@ namespace WeatherAppFMW.Providers.Tests
                     .Respond("application/json", JsonConvert.SerializeObject(forecastWeather));
             var client = new HttpClient(mockHttp);
 
-            WeatherForecast forecast = new WeatherForecast(this._config.Object, client);
+            WeatherForecast forecast = new WeatherForecast(this._loggerService.Object, this._config.Object, client);
             IForecast _forecast = forecast.GetForecastAsync(city).Result;
 
             Assert.IsNotNull(_forecast);
@@ -55,7 +54,7 @@ namespace WeatherAppFMW.Providers.Tests
                     .Respond("application/json", string.Empty);
             var client = new HttpClient(mockHttp);
 
-            WeatherForecast forecast = new WeatherForecast(this._config.Object, client);
+            WeatherForecast forecast = new WeatherForecast(this._loggerService.Object, this._config.Object, client);
             IForecast _forecast = forecast.GetForecastAsync(city).Result;
 
             Assert.IsNull(_forecast);

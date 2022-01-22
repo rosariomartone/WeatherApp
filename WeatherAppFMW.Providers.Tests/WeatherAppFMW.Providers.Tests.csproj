@@ -184,6 +184,10 @@
       <Project>{4CC0D1D7-24A9-4166-BE50-63B55E486499}</Project>
       <Name>WeatherAppFMW.Providers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WeatherAppFMW.Services\WeatherAppFMW.Services.csproj">
+      <Project>{71B3FD26-6A29-4AD6-90E1-BFE21168428F}</Project>
+      <Name>WeatherAppFMW.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

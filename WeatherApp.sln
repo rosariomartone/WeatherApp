@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAppFMW.Providers.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAppFMW.Tests", "WeatherAppFMW.Tests\WeatherAppFMW.Tests.csproj", "{4ABA82AE-E9F9-4F81-B426-E3C8ED0569A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherAppFMW.Services", "WeatherAppFMW.Services\WeatherAppFMW.Services.csproj", "{71B3FD26-6A29-4AD6-90E1-BFE21168428F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4ABA82AE-E9F9-4F81-B426-E3C8ED0569A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4ABA82AE-E9F9-4F81-B426-E3C8ED0569A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4ABA82AE-E9F9-4F81-B426-E3C8ED0569A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71B3FD26-6A29-4AD6-90E1-BFE21168428F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71B3FD26-6A29-4AD6-90E1-BFE21168428F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71B3FD26-6A29-4AD6-90E1-BFE21168428F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71B3FD26-6A29-4AD6-90E1-BFE21168428F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

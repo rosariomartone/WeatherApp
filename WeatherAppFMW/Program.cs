@@ -5,11 +5,16 @@ using System.Linq;
 using WeatherAppFMW.Helpers;
 using WeatherAppFMW.Models;
 using WeatherAppFMW.Providers;
+using WeatherAppFMW.Providers.Providers;
+using WeatherAppFMW.Services;
 
 namespace WeatherAppFMW
 {
     internal class Program
     {
+        private static ILoggerService _loggerService = null;
+        private static IForecastProvider _forecastProvider = null;
+
         public static void Main(string[] args)
         {
             string city;
@@ -27,19 +32,24 @@ namespace WeatherAppFMW
                 .Build();
 
             string provider = config.GetSection("Provider").Value;
+            _loggerService = LoggerProvider.GetLoggerService(Providers.Enums.EnumLogType.Serilog);
+            _forecastProvider = ForecastProvider.GetProvider(provider, config, _loggerService);
 
-            IForecastProvider forecastProvider = ForecastProvider.GetProvider(provider, config);
-
-            if (forecastProvider != null)
+            if (_forecastProvider != null)
             {
-                IForecast weatherForecast = forecastProvider.GetForecastAsync(city).Result;
+                IForecast weatherForecast = _forecastProvider.GetForecastAsync(city).Result;
 
                 if (weatherForecast == null)
                 {
-                    Console.WriteLine("The city entered is not found: {0}", city);
+                    string errorMessage = $"The city entered is not found: { city }";
+                    Console.WriteLine(errorMessage);
+
+                    _loggerService.LogWarning(errorMessage);
                 }
                 else
                 {
+                    _loggerService.LogWarning($"City: {city} has been found!");
+
                     Console.WriteLine("The city entered has been found: {0}", city);
                     Console.WriteLine("Name: {0}", weatherForecast.GetName());
                     Console.WriteLine("Region: {0}", weatherForecast.GetRegion());
@@ -62,7 +72,10 @@ namespace WeatherAppFMW
             }
             else
             {
-                Console.WriteLine("No providers found for: {0}", provider);
+                string message = $"No providers found for: {provider}";
+                Console.WriteLine(message);
+
+                _loggerService.LogError(message);
             }
         }
     }

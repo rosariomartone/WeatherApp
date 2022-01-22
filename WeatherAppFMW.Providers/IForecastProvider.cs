@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using WeatherAppFMW.Models;
+using WeatherAppFMW.Services;
 
 namespace WeatherAppFMW.Providers
 {
