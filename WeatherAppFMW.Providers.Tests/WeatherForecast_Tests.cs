@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
+using NSubstitute;
 using RichardSzalay.MockHttp;
 using System.Net.Http;
 using WeatherAppFMW.Models;
@@ -35,11 +36,13 @@ namespace WeatherAppFMW.Providers.Tests
                     .Respond("application/json", JsonConvert.SerializeObject(forecastWeather));
             var client = new HttpClient(mockHttp);
 
-            IForecastService forecast = new WeatherForecastService(this._loggerService.Object, this._config.Object, client);
+            IForecastService forecast = new WeatherForecastService(this._loggerService, this._config.Object, client);
             IForecast _forecast = forecast.GetForecastAsync(city).Result;
 
             Assert.IsNotNull(_forecast);
             Assert.IsTrue(_forecast.GetCountry().Equals("United Kingdom"));
+            this._loggerService.Received(1).LogInfo($"Response JSON was:");
+            this._loggerService.DidNotReceive().LogError($"Error in making the call to the API.");
         }
 
         /// <summary>
@@ -55,10 +58,11 @@ namespace WeatherAppFMW.Providers.Tests
                     .Respond("application/json", string.Empty);
             var client = new HttpClient(mockHttp);
 
-            IForecastService forecastService = new WeatherForecastService(this._loggerService.Object, this._config.Object, client);
+            IForecastService forecastService = new WeatherForecastService(this._loggerService, this._config.Object, client);
             IForecast _forecast = forecastService.GetForecastAsync(city).Result;
 
             Assert.IsNull(_forecast);
+            this._loggerService.Received(1).LogError($"Error in making the call to the API.");
         }
     }
 }

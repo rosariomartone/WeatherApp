@@ -56,7 +56,8 @@ namespace WeatherAppFMW.Services
 
             this._loggerService.LogInfo($"Response was {statusCode.ToString()}.");
 
-            if (statusCode.Equals(HttpStatusCode.OK))
+            if (statusCode.Equals(HttpStatusCode.OK) &&
+                !string.IsNullOrEmpty(responseString))
             {
                 this._loggerService.LogInfo($"Response JSON was:");
                 this._loggerService.LogInfo($"{responseString}");
@@ -65,7 +66,7 @@ namespace WeatherAppFMW.Services
             }
             else
             {
-                this._loggerService.LogInfo($"Error {statusCode.ToString()} in making the call to the API.");
+                this._loggerService.LogError($"Error in making the call to the API.");
             }
 
             return null;

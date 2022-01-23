@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Moq;
+using NSubstitute;
 using WeatherAppFMW.Services.Interfaces;
 
 namespace WeatherAppFMW.Providers.Tests
@@ -10,7 +11,8 @@ namespace WeatherAppFMW.Providers.Tests
     public class BaseTest
     {
         protected Mock<IConfiguration> _config = null;
-        protected Mock<ILoggerService> _loggerService = null;
+        protected ILoggerService _loggerService = null;
+        protected IConfigurationSection _mockConfSection = null;
 
         /// <summary>
         /// Constructor for BaseTest.
@@ -23,7 +25,8 @@ namespace WeatherAppFMW.Providers.Tests
             mockConfSection.SetupGet(m => m[It.Is<string>(s => s == "WeatherAPIUrl_Forecast")]).Returns("http://api.weatherapi.com/v1/forecast.json");
             _config.Setup(a => a.GetSection(It.Is<string>(s => s == "API"))).Returns(mockConfSection.Object);
 
-            _loggerService = new Mock<ILoggerService>();
+            _mockConfSection = Substitute.For<IConfigurationSection>();
+            _loggerService = Substitute.For<ILoggerService>();
         }
     }
 }
