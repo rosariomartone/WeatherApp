@@ -2,9 +2,9 @@
 using WeatherAppFMW.Models;
 using WeatherAppFMW.Services;
 
-namespace WeatherAppFMW.Providers
+namespace WeatherAppFMW.Services.Interfaces
 {
-    public interface IForecastProvider
+    public interface IForecastService
     {
         Task<IForecast> GetForecastAsync(string city);
     }

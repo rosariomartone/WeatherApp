@@ -1,5 +1,6 @@
 ﻿using Serilog;
 using Serilog.Events;
+using WeatherAppFMW.Services.Interfaces;
 
 namespace WeatherAppFMW.Services
 {

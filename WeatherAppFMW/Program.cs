@@ -5,15 +5,15 @@ using System.Linq;
 using WeatherAppFMW.Helpers;
 using WeatherAppFMW.Models;
 using WeatherAppFMW.Providers;
-using WeatherAppFMW.Providers.Providers;
-using WeatherAppFMW.Services;
+using WeatherAppFMW.Providers.Interfaces;
+using WeatherAppFMW.Services.Interfaces;
 
 namespace WeatherAppFMW
 {
     internal class Program
     {
         private static ILoggerService _loggerService = null;
-        private static IForecastProvider _forecastProvider = null;
+        private static IForecastService _forecastService = null;
 
         public static void Main(string[] args)
         {
@@ -33,11 +33,11 @@ namespace WeatherAppFMW
 
             string provider = config.GetSection("Provider").Value;
             _loggerService = LoggerProvider.GetLoggerService(Providers.Enums.EnumLogType.Serilog);
-            _forecastProvider = ForecastProvider.GetProvider(provider, config, _loggerService);
+            _forecastService = ForecastProvider.GetService(provider, config, _loggerService);
 
-            if (_forecastProvider != null)
+            if (_forecastService != null)
             {
-                IForecast weatherForecast = _forecastProvider.GetForecastAsync(city).Result;
+                IForecast weatherForecast = _forecastService.GetForecastAsync(city).Result;
 
                 if (weatherForecast == null)
                 {

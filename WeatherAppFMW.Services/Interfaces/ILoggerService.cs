@@ -1,4 +1,4 @@
-﻿namespace WeatherAppFMW.Services
+﻿namespace WeatherAppFMW.Services.Interfaces
 {
     public interface ILoggerService
     {

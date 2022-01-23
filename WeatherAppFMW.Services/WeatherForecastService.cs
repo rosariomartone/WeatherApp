@@ -6,13 +6,14 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using WeatherAppFMW.Models;
 using WeatherAppFMW.Services;
+using WeatherAppFMW.Services.Interfaces;
 
-namespace WeatherAppFMW.Providers.Providers
+namespace WeatherAppFMW.Services
 {
     /// <summary>
     /// Implementation of IForecastProvider for API.
     /// </summary>
-    public class WeatherForecast : IForecastProvider
+    public class WeatherForecastService : IForecastService
     {
         private string _apiKey = string.Empty;
         private string _forecastUrl = string.Empty;
@@ -23,7 +24,7 @@ namespace WeatherAppFMW.Providers.Providers
         /// Constructior for WeatherForecast.
         /// </summary>
         /// <param name="build"></param>
-        public WeatherForecast(
+        public WeatherForecastService(
             ILoggerService loggerService, 
             IConfiguration build, 
             HttpClient client)

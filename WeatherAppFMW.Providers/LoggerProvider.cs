@@ -1,7 +1,8 @@
 ﻿using WeatherAppFMW.Providers.Enums;
 using WeatherAppFMW.Services;
+using WeatherAppFMW.Services.Interfaces;
 
-namespace WeatherAppFMW.Providers.Providers
+namespace WeatherAppFMW.Providers
 {
     public static class LoggerProvider
     {

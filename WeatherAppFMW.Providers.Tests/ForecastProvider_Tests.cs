@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using WeatherAppFMW.Services.Interfaces;
 
 namespace WeatherAppFMW.Providers.Tests
 {
@@ -14,11 +15,11 @@ namespace WeatherAppFMW.Providers.Tests
         /// <param name="providerType"></param>
         [TestMethod]
         [DataRow("API")]
-        public void GetProvider_RetrieveProvider(string providerType)
+        public void GetService_RetrieveProvider(string providerType)
         {
-            IForecastProvider provider = ForecastProvider.GetProvider(providerType, _config.Object, _loggerService.Object);
+            IForecastService forecastService = ForecastProvider.GetService(providerType, _config.Object, _loggerService.Object);
 
-            Assert.IsNotNull(provider);
+            Assert.IsNotNull(forecastService);
         }
 
         /// <summary>
@@ -29,9 +30,9 @@ namespace WeatherAppFMW.Providers.Tests
         [DataRow("MSSQL")]
         public void GetProvider_FailingRetrieveProvider(string providerType)
         {
-            IForecastProvider provider = ForecastProvider.GetProvider(providerType, _config.Object, _loggerService.Object);
+            IForecastService forecastService = ForecastProvider.GetService(providerType, _config.Object, _loggerService.Object);
 
-            Assert.IsNull(provider);
+            Assert.IsNull(forecastService);
         }
     }
 }

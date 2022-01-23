@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Moq;
-using WeatherAppFMW.Services;
+using WeatherAppFMW.Services.Interfaces;
 
 namespace WeatherAppFMW.Providers.Tests
 {
